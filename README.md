@@ -3,20 +3,15 @@
 </h1>
 
 <h3 align="center">
-  Desafio 2: Gympoint, o início
+  Desafio 2: Projeto Gympoint
 </h3>
 
+<blockquote align="center">“Desafio realizado no treinamento imersivo GoStack - Rodrigo Gonçalves Santana”!</blockquote>
 
 
-<p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-</p>
-
-## :rocket: Sobre o desafio
+## :rocket: Requisitos do desafio
 
 A aplicação que iremos dar início ao desenvolvimento a partir de agora é um app gerenciador de academia, o **Gympoint**.
-
-Nesse primeiro desafio vamos criar algumas funcionalidades básicas que aprendemos ao longo das aulas até aqui. Esse projeto será desenvolvido aos poucos até o fim da sua jornada onde você terá uma aplicação completa envolvendo back-end, front-end e mobile, que será utilizada para a **certificação do bootcamp**, então, bora pro código!
 
 ### Um pouco sobre as ferramentas
 
@@ -68,7 +63,7 @@ module.exports = {
 };
 ```
 
-Agora execute:
+Executar:
 
 ```js
 yarn sequelize db:seed:all
@@ -86,15 +81,3 @@ Permita que alunos sejam mantidos (cadastrados/atualizados) na aplicação utili
 Utilize uma nova tabela no banco de dados chamada `students`.
 
 O cadastro de alunos só pode ser feito por usuários autenticados na aplicação.
-
-## 📅 Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
-## :memo: Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
----
-
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
