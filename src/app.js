@@ -1,3 +1,5 @@
+import 'dotenv/config'; // Lib para trabalhar com váriaveis de ambiente.
+
 import express from 'express';
 import routes from './routes';
 
