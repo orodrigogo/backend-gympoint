@@ -10,7 +10,7 @@ class User extends Model {
         // Campo virtual nunca vai existir na base de dados. Somente, é utilizado do lado do código.
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
-        provider: Sequelize.BOOLEAN,
+        admin: Sequelize.BOOLEAN,
       },
       {
         sequelize,

@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Plan from '../models/Plan';
+import User from '../models/User';
 
 class PlansController {
   async store(req, res) {
@@ -13,6 +14,17 @@ class PlansController {
     // Validação de campos com o Yup.
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    // Verificando se o usuário um ADM.
+    const isAdmin = await User.findOne({
+      where: { id: req.userId, admin: true },
+    });
+
+    if (!isAdmin) {
+      return res
+        .status(400)
+        .json({ error: 'Only Admins can register a new plans' });
     }
 
     /**
@@ -49,6 +61,17 @@ class PlansController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
+    // Verificando se o usuário um ADM.
+    const isAdmin = await User.findOne({
+      where: { id: req.userId, admin: true },
+    });
+
+    if (!isAdmin) {
+      return res
+        .status(400)
+        .json({ error: 'Only Admins can update a new plans' });
+    }
+
     // Verificando se o plano existe
     const plan = await Plan.findByPk(req.params.id);
     if (!plan) {
@@ -60,6 +83,15 @@ class PlansController {
   }
 
   async delete(req, res) {
+    // Verificando se o usuário um ADM.
+    const isAdmin = await User.findOne({
+      where: { id: req.userId, admin: true },
+    });
+
+    if (!isAdmin) {
+      return res.status(400).json({ error: 'Only Admins can delete a plans' });
+    }
+
     // Verificando se o plano existe
     const plan = await Plan.findByPk(req.params.id);
     if (!plan) {
