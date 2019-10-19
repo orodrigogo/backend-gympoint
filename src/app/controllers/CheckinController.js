@@ -1,18 +1,16 @@
 import { Op } from 'sequelize';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  setMinutes,
-  setHours,
-  setSeconds,
-  parseISO,
-} from 'date-fns';
+import { subDays, setMinutes, setHours, setSeconds } from 'date-fns';
 import Checkin from '../models/Checkin';
 
 class CheckinController {
   async index(req, res) {
-    return res.json({ list: true });
+    const checkins = await Checkin.findAll({
+      where: {
+        student_id: req.params.id,
+      },
+    });
+
+    return res.json(checkins);
   }
 
   async store(req, res) {
