@@ -5,6 +5,8 @@ import SessionController from './app/controllers/SessionController';
 import PlansController from './app/controllers/PlansController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinController from './app/controllers/CheckinController';
+import HelpOrdersController from './app/controllers/HelpOrdersController';
+import PendingQuestionController from './app/controllers/PendingQuestionController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -30,5 +32,11 @@ routes.get('/registrations', RegistrationController.index);
 
 routes.post('/students/:id/checkins', CheckinController.store);
 routes.get('/students/:id/checkins', CheckinController.index);
+
+routes.post('/students/:id/help-orders', HelpOrdersController.store);
+routes.get('/students/:id/help-orders', HelpOrdersController.index);
+routes.put('/students/help-orders/:id/answer', HelpOrdersController.update);
+
+routes.get('/pendingquestions/', PendingQuestionController.index);
 
 export default routes;
