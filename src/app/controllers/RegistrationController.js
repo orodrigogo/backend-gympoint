@@ -5,6 +5,9 @@ import Student from '../models/Student';
 import User from '../models/User';
 import Registration from '../models/Registration';
 
+import newregistrationMail from '../jobs/newregistrationMail';
+import Queue from '../../lib/Queue';
+
 class RegistraionController {
   async index(req, res) {
     // Verificando se o usuário um ADM.
@@ -69,7 +72,31 @@ class RegistraionController {
       plan_id: req.params.idPlan,
     });
 
-    return res.json(register);
+    // Recuperando as info do aluno para usar no envio de email.
+    const info_registration = await Registration.findOne({
+      where: { id: register.id },
+
+      // Fazendo o relacionamento.
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'price'],
+        },
+      ],
+    });
+
+    // Enviar e-mail para o aluno com a confirmação de matrícula.
+    await Queue.add(newregistrationMail.key, {
+      info_registration,
+    });
+
+    return res.json(info_registration);
   }
 
   async delete(req, res) {
