@@ -1,8 +1,25 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Student from '../models/Student';
 
 class StudentController {
+  async index(req, res) {
+    const { searchName } = req.query;
+
+    // Caso não seja passado o searchName por parametro. Retorna todos.
+    if (!searchName) {
+      return res.json(await Student.findAll());
+    }
+
+    // ilike = é o like case insensitive. Ou seja, vai encontrar nomes com letras maisculas e minusculas.
+    const students = await Student.findAll({
+      where: { name: { [Op.iLike]: `%${searchName}%` } },
+    });
+
+    return res.json(students);
+  }
+
   async store(req, res) {
     // Denição do padrão de objeto com Yup.
     const schema = Yup.object().shape({
