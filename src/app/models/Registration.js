@@ -9,9 +9,9 @@ class Registration extends Model {
         end_date: Sequelize.DATE,
         price: Sequelize.FLOAT,
         /**
-         * Adicione um campo boolean true/false na listagem de matrículas indicando
+         * Campo boolean true/false na listagem de matrículas indicando
          * se a matrícula está ativa ou não, ou seja, se a data de término é posterior
-         * à atual e a data de início inferior (utilize um campo VIRTUAL).
+         * à atual e a data de início inferior (utilizando um campo VIRTUAL).
          */
         is_active: {
           type: Sequelize.VIRTUAL,
