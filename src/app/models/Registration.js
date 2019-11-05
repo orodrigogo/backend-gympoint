@@ -1,5 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
-import { isBefore, isAfter, parseISO } from 'date-fns';
+import { isBefore, isAfter } from 'date-fns';
 
 class Registration extends Model {
   static init(sequelize) {
