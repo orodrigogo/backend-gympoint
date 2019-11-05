@@ -20,7 +20,15 @@ class RegistraionController {
     }
 
     const registers = await Registration.findAll({
-      attributes: ['id', 'end_date', 'price', 'created_at', 'updated_at'],
+      attributes: [
+        'id',
+        'start_date',
+        'end_date',
+        'price',
+        'is_active',
+        'created_at',
+        'updated_at',
+      ],
       // Fazendo o relacionamento.
       include: [
         {

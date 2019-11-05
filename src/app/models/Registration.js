@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import { isBefore, isAfter, parseISO } from 'date-fns';
 
 class Registration extends Model {
   static init(sequelize) {
@@ -7,6 +8,20 @@ class Registration extends Model {
         start_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
         price: Sequelize.FLOAT,
+        /**
+         * Adicione um campo boolean true/false na listagem de matrículas indicando
+         * se a matrícula está ativa ou não, ou seja, se a data de término é posterior
+         * à atual e a data de início inferior (utilize um campo VIRTUAL).
+         */
+        is_active: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return (
+              isBefore(this.start_date, new Date()) &&
+              isAfter(this.end_date, new Date())
+            );
+          },
+        },
       },
       {
         sequelize,
