@@ -1,6 +1,7 @@
 import 'dotenv/config'; // Lib para trabalhar com váriaveis de ambiente.
 
 import express from 'express';
+import cors from 'cors';
 import routes from './routes';
 
 import './database';
@@ -15,6 +16,7 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+    this.server.use(cors());
   }
 
   routes() {
