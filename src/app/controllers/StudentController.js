@@ -101,6 +101,11 @@ class StudentController {
     await student.destroy(student);
     return res.json({ deleted: true });
   }
+
+  async load(req, res) {
+    const student = await Student.findByPk(req.params.id);
+    return res.json(student);
+  }
 }
 
 export default new StudentController();
