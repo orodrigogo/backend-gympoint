@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
 import Student from '../models/Student';
+import User from '../models/User';
 
 class StudentController {
   async index(req, res) {
@@ -77,6 +78,28 @@ class StudentController {
     const returnUpdate = await student.update(req.body);
 
     return res.json(returnUpdate);
+  }
+
+  async delete(req, res) {
+    // Verificando se o usuário um ADM.
+    const isAdmin = await User.findOne({
+      where: { id: req.userId, admin: true },
+    });
+
+    if (!isAdmin) {
+      return res
+        .status(400)
+        .json({ error: 'Only Admins can delete a student' });
+    }
+
+    // Verificando se o usuário existe
+    const student = await Student.findByPk(req.params.id);
+    if (!student) {
+      return res.status(400).json({ error: "Student don't exists" });
+    }
+
+    await student.destroy(student);
+    return res.json({ deleted: true });
   }
 }
 
