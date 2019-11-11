@@ -48,6 +48,11 @@ class PlansController {
     return res.json(plan);
   }
 
+  async load(req, res) {
+    const plan = await Plan.findByPk(req.params.id);
+    return res.json(plan);
+  }
+
   async update(req, res) {
     // Denição do padrão de objeto com Yup.
     const schema = Yup.object().shape({

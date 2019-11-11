@@ -47,6 +47,11 @@ class RegistraionController {
     return res.json(registers);
   }
 
+  async load(req, res) {
+    const registration = await Registration.findByPk(req.params.id);
+    return res.json(registration);
+  }
+
   async store(req, res) {
     // Verificando se o usuário um ADM.
     const isAdmin = await User.findOne({

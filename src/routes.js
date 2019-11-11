@@ -23,6 +23,7 @@ routes.get('/students/:id', StudentController.load);
 
 routes.post('/plans', PlansController.store);
 routes.get('/plans', PlansController.index);
+routes.get('/plans/:id', PlansController.load);
 routes.put('/plans/:id', PlansController.update);
 routes.delete('/plans/:id', PlansController.delete);
 
@@ -32,6 +33,7 @@ routes.post('/registrations/:idPlan/:idStudent', RegistrationController.store);
 routes.delete('/registrations/:id', RegistrationController.delete);
 routes.put('/registrations/:id', RegistrationController.update);
 routes.get('/registrations', RegistrationController.index);
+routes.get('/registrations/:id', RegistrationController.load);
 
 routes.post('/students/:id/checkins', CheckinController.store);
 routes.get('/students/:id/checkins', CheckinController.index);

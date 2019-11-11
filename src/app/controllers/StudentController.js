@@ -6,16 +6,24 @@ import User from '../models/User';
 
 class StudentController {
   async index(req, res) {
-    const { searchName } = req.query;
+    // Se o parametro page não for informado, será por padrão 1.
+    const { searchName, page = 1 } = req.query;
 
     // Caso não seja passado o searchName por parametro. Retorna todos.
     if (!searchName) {
-      return res.json(await Student.findAll());
+      return res.json(
+        await Student.findAll({
+          limit: 5, // numero de registros por paginação.
+          offset: (page - 1) * 5, // conta para pular as páginas de 5 em 5.
+        })
+      );
     }
 
     // ilike = é o like case insensitive. Ou seja, vai encontrar nomes com letras maisculas e minusculas.
     const students = await Student.findAll({
       where: { name: { [Op.iLike]: `%${searchName}%` } },
+      limit: 5, // numero de registros por paginação.
+      offset: (page - 1) * 5, // conta para pular as páginas de 5 em 5.
     });
 
     return res.json(students);
