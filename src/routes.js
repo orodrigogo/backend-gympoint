@@ -13,13 +13,13 @@ import authMiddleware from './app/middlewares/auth';
 const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
+routes.get('/students/:id', StudentController.load);
 
 // Neste caso, o Middleware de Autenticação só vai funcionar para as rotas que estão abaixo dele.
 routes.use(authMiddleware);
 routes.post('/students', StudentController.store);
 routes.get('/students', StudentController.index);
 routes.delete('/students/:id', StudentController.delete);
-routes.get('/students/:id', StudentController.load);
 
 routes.post('/plans', PlansController.store);
 routes.get('/plans', PlansController.index);
