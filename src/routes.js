@@ -14,6 +14,8 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 routes.get('/students/:id', StudentController.load);
+routes.post('/students/:id/checkins', CheckinController.store);
+routes.get('/students/:id/checkins', CheckinController.index);
 
 // Neste caso, o Middleware de Autenticação só vai funcionar para as rotas que estão abaixo dele.
 routes.use(authMiddleware);
@@ -34,9 +36,6 @@ routes.delete('/registrations/:id', RegistrationController.delete);
 routes.put('/registrations/:id', RegistrationController.update);
 routes.get('/registrations', RegistrationController.index);
 routes.get('/registrations/:id', RegistrationController.load);
-
-routes.post('/students/:id/checkins', CheckinController.store);
-routes.get('/students/:id/checkins', CheckinController.index);
 
 routes.post('/students/:id/help-orders', HelpOrdersController.store);
 routes.get('/students/:id/help-orders', HelpOrdersController.index);
