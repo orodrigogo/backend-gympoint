@@ -11,6 +11,7 @@ class HelpOrdersController {
       where: {
         student_id: req.params.id,
       },
+      order: [['updatedAt', 'DESC']],
       // Fazendo o relacionamento.
       include: [
         {
