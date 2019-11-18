@@ -16,6 +16,7 @@ routes.post('/sessions', SessionController.store);
 routes.get('/students/:id', StudentController.load);
 routes.post('/students/:id/checkins', CheckinController.store);
 routes.get('/students/:id/checkins', CheckinController.index);
+routes.get('/students/:id/help-orders', HelpOrdersController.index);
 
 // Neste caso, o Middleware de Autenticação só vai funcionar para as rotas que estão abaixo dele.
 routes.use(authMiddleware);
